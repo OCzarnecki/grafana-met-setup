@@ -16,7 +16,7 @@ permissions:
 jobs:
   test:
     name: Meticulous
-    runs-on: ubuntu-x64-xlarge
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
