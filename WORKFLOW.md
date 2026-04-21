@@ -1,4 +1,3 @@
-
 # Grafana workflow
 
 This document is based on [GOVERNANCE.md](GOVERNANCE.md). We assume good faith and intend to keep all processes as lightweight as possible but as specific as required. In case of disagreements about anything in this document, GOVERNANCE.md applies.
