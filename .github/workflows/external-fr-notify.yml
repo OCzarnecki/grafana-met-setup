@@ -1,9 +1,7 @@
 name: External FR Notify
 
-on:
-  issues:
-    types: [labeled]
-
+'on':
+  workflow_dispatch: {}
 permissions:
   contents: read
   issues: write

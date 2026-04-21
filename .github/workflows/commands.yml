@@ -1,11 +1,7 @@
 name: Run commands when issues are labeled or comments added
 
-on:
-  issues:
-    types: [labeled, unlabeled]
-  issue_comment:
-    types: [created]
-
+'on':
+  workflow_dispatch: {}
 concurrency:
   group: issue-commands-${{ github.event.issue.number }}
 

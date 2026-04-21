@@ -1,13 +1,7 @@
 name: Run dashboard schema v2 e2e
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - '**'
-
+'on':
+  workflow_dispatch: {}
 jobs:
   dashboard-schema-v2-e2e:
     runs-on: ubuntu-x64-large

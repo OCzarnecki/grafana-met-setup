@@ -1,9 +1,7 @@
 name: External PR Notify Trigger
 
-on:
-  pull_request_target:  # zizmor: ignore[dangerous-triggers]
-    types: [labeled]
-
+'on':
+  workflow_dispatch: {}
 permissions:
   contents: read
 

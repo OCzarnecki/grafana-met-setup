@@ -1,8 +1,7 @@
 name: Analytics Events Report
 
-on:
-  workflow_dispatch:
-
+'on':
+  workflow_dispatch: {}
 permissions: {}
 
 jobs:

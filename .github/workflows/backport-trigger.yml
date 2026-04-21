@@ -3,12 +3,8 @@
 # via workflow_run
 
 name: Backport (trigger)
-on:
-  pull_request:
-    types:
-      - closed
-      - labeled
-
+'on':
+  workflow_dispatch: {}
 permissions: {}
 
 jobs:

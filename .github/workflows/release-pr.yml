@@ -5,42 +5,8 @@
 # either be triggered in the release promotion process or in the release comms process (that is triggered by merging
 # this PR).
 name: Grafana Release PR
-on:
-  workflow_dispatch:
-    inputs:
-      previous_version:
-        type: string
-        required: false
-        description: 'The release version (semver, git tag, branch or commit) to use for comparison'
-      version:
-        required: true
-        type: string
-        description: The version of Grafana that is being released (without the `v` prefix)`
-      target:
-        required: false
-        type: string
-        description: 'Unused: left here for backwards compatibility'
-      changelog:
-        required: false
-        type: boolean
-        default: true
-      bump:
-        required: false
-        type: boolean
-        default: true
-      dry_run:
-        required: false
-        default: false
-        type: boolean
-      latest:
-        required: false
-        default: false
-        type: boolean
-      release_date:
-        required: false
-        type: string
-        description: "Release date in format YYYY-MM-DD"
-
+'on':
+  workflow_dispatch: {}
 permissions:
   contents: read
 

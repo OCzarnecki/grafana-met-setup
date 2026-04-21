@@ -1,6 +1,6 @@
 name: Verify release tar.gz
 
-on:
+'on':
   workflow_call:
     inputs:
       run-id:
@@ -12,7 +12,7 @@ on:
         required: false
         type: string
         default: artifacts-targz-linux-amd64
-
+  workflow_dispatch: {}
 permissions:
   contents: read
 

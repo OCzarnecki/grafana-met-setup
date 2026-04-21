@@ -1,6 +1,6 @@
 name: Verify release packages
 
-on:
+'on':
   workflow_call:
     inputs:
       run-id:
@@ -13,14 +13,16 @@ on:
         type: string
         default: artifacts-linux-amd64
       docker-artifact-name:
-        description: Name of the artifact containing the alpine docker image. Defaults to packages-artifact-name.
+        description: Name of the artifact containing the alpine docker image. Defaults
+          to packages-artifact-name.
         required: false
         type: string
       docker-ubuntu-artifact-name:
-        description: Name of the artifact containing the ubuntu docker image. Defaults to docker-artifact-name.
+        description: Name of the artifact containing the ubuntu docker image. Defaults
+          to docker-artifact-name.
         required: false
         type: string
-
+  workflow_dispatch: {}
 permissions:
   contents: read
 

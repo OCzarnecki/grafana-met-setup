@@ -1,15 +1,20 @@
 name: Publish artifacts to bucket
-on:
+'on':
   workflow_call:
     inputs:
       pattern:
-        description: |
-          (From actinos/download-artifact) Glob pattern of artifacts (instead of `name`)
-          Be careful when using this option; the contents of the root of each artifact are coalesced, so ensure that they do not collide.
+        description: '(From actinos/download-artifact) Glob pattern of artifacts (instead
+          of `name`)
+
+          Be careful when using this option; the contents of the root of each artifact
+          are coalesced, so ensure that they do not collide.
+
+          '
         type: string
         required: false
       name:
-        description: (From actinos/download-artifact) Name of the GitHub artifact to upload (Ignored if `pattern` is set)
+        description: (From actinos/download-artifact) Name of the GitHub artifact
+          to upload (Ignored if `pattern` is set)
         type: string
         required: false
       bucket:
@@ -20,9 +25,9 @@ on:
         description: Path in the GCS bucket
         type: string
         required: false
-        default: "."
+        default: .
       environment:
-        description: "'prod' or 'dev'"
+        description: '''prod'' or ''dev'''
         type: string
         required: false
         default: dev
@@ -37,6 +42,7 @@ on:
         type: string
         required: false
         default: github-hosted-ubuntu-x64-small
+  workflow_dispatch: {}
 jobs:
   publish:
     runs-on: ${{ inputs.runs-on }}

@@ -1,5 +1,5 @@
 name: Dispatch check for patch conflicts
-on:
+'on':
   workflow_call:
     inputs:
       head_ref:
@@ -20,7 +20,7 @@ on:
       pr_commit_sha:
         type: string
         required: true
-
+  workflow_dispatch: {}
 permissions:
   id-token: write
   contents: read

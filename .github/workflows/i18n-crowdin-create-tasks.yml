@@ -1,11 +1,7 @@
 name: Crowdin automatic task management
 
-on:
-  workflow_dispatch:
-  # once a month on the first day of the month at midnight
-  schedule:
-    - cron: "0 0 1 * *"
-
+'on':
+  workflow_dispatch: {}
 jobs:
   create-tasks-in-crowdin:
     uses: grafana/grafana-github-actions/.github/workflows/crowdin-create-tasks.yml@main

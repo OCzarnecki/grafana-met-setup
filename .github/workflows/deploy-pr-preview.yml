@@ -1,14 +1,7 @@
 name: Deploy pr preview
 
-on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - closed
-    paths:
-      - "docs/sources/**"
-
+'on':
+  workflow_dispatch: {}
 permissions: {}
 
 jobs:

@@ -1,23 +1,7 @@
 name: External FR Weekly Digest
 
-on:
-  schedule:
-    # Run every Monday at 9:00 AM UTC
-    - cron: '0 9 * * 1'
-  workflow_dispatch:
-    # Manual trigger for testing - secured with validation
-    inputs:
-      dry_run:
-        description: 'Dry run (skip Slack notifications)'
-        required: false
-        default: false
-        type: boolean
-      team_filter:
-        description: 'Filter to specific team (leave empty for all enabled teams)'
-        required: false
-        default: ''
-        type: string
-
+'on':
+  workflow_dispatch: {}
 permissions:
   contents: read
   issues: read

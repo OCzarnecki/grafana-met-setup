@@ -1,17 +1,7 @@
 name: "K8s Codegen Check"
 
-on:
-  workflow_dispatch:
-  pull_request:
-    branches: [main]
-    paths:
-      - "pkg/apis/**"
-      - "pkg/aggregator/apis/**"
-      - "pkg/apimachinery/apis/**"
-      - "hack/**"
-      - "apps/**"
-      - "*.sum"
-
+'on':
+  workflow_dispatch: {}
 jobs:
   check:
     name: K8s Codegen Check
