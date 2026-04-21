@@ -29,6 +29,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          file: Dockerfile.meticulous
           platforms: linux/amd64
           tags: grafana:${{ github.sha }}
           push: false
@@ -40,7 +41,3 @@ jobs:
           api-token: ${{ secrets.METICULOUS_API_TOKEN }}
           image-tag: grafana:${{ github.sha }}
           container-port: 3000
-          container-env: |
-            GF_AUTH_ANONYMOUS_ENABLED=true
-            GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-            GF_AUTH_DISABLE_LOGIN_FORM=true
