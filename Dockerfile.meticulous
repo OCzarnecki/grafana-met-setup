@@ -33,12 +33,11 @@ COPY emails emails
 
 RUN yarn build
 
-# Render the static index.html from the built assets manifest and a committed
-# bootdata snapshot. The snapshot captures what a live Grafana backend would
-# inline into the monolith index.html — see scripts/meticulous/bootdata.json.
+# Render the static index.html from the built assets manifest. Bootdata is
+# retrieved at replay time via window.Meticulous.replay.retrieveCustomData —
+# see scripts/meticulous/render-index.mjs and public/views/index.html.
 RUN node scripts/meticulous/render-index.mjs \
       public/build/assets-manifest.json \
-      scripts/meticulous/bootdata.json \
       /out/index.html
 
 # Final stage: nginx serving the built assets.

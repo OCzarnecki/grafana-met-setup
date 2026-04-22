@@ -334,6 +334,18 @@
       [[end]]
     </script>
 
+    [[ if .EnableMeticulousRecorder ]]
+    <script nonce="[[.Nonce]]">
+      // Capture bootdata so the Meticulous frontend-only image can restore it
+      // at replay time without a committed snapshot. See
+      // scripts/meticulous/render-index.mjs for the replay side.
+      window.Meticulous?.record?.recordCustomData(
+        'grafanaBootData',
+        JSON.stringify(window.grafanaBootData)
+      );
+    </script>
+    [[ end ]]
+
     [[if .GoogleTagManagerId]]
     <!-- Google Tag Manager -->
     <script nonce="[[.Nonce]]">

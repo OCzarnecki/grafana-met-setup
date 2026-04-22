@@ -1,27 +1,22 @@
 #!/usr/bin/env node
 // Renders a static index.html for the Meticulous frontend-only container.
 //
-// Meticulous replays recorded network traffic against the image, so the
-// container must match whatever calls (or absence of calls) the baseline
-// recorded. The baseline was captured against monolith Grafana, which
-// INLINES window.grafanaBootData into the HTML via a Go template and never
-// fetches /bootdata. We reproduce that pattern here: we load a committed
-// bootdata.json, merge in the freshly-built asset paths, inline the whole
-// thing, and resolve window.__grafana_boot_data_promise immediately.
+// Bootdata is recorded on live Grafana via window.Meticulous.record.recordCustomData
+// (see public/views/index.html) and retrieved here at replay time via
+// window.Meticulous.replay.retrieveCustomData. Only the assets field — JS/CSS
+// bundle paths, which are hash-based and build-specific — is supplied by this
+// script from the build-time manifest.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-const [, , manifestPathArg, bootdataPathArg, outPathArg] = process.argv;
-if (!manifestPathArg || !bootdataPathArg || !outPathArg) {
-  console.error(
-    'usage: render-index.mjs <assets-manifest.json> <bootdata.json> <out-index.html>'
-  );
+const [, , manifestPathArg, outPathArg] = process.argv;
+if (!manifestPathArg || !outPathArg) {
+  console.error('usage: render-index.mjs <assets-manifest.json> <out-index.html>');
   process.exit(1);
 }
 
 const manifest = JSON.parse(readFileSync(resolve(manifestPathArg), 'utf8'));
-const bootdata = JSON.parse(readFileSync(resolve(bootdataPathArg), 'utf8'));
 
 const integrityByPath = Object.create(null);
 for (const v of Object.values(manifest)) {
@@ -48,7 +43,7 @@ const cssFiles = entry.app.assets.css.map((filePath) => ({
 }));
 
 // Match pkg/api/dtos.EntryPointAssets JSON shape. Overrides whatever `assets`
-// was in the captured bootdata — those hashes are stale by definition.
+// was in the recorded bootdata — those hashes are stale by definition.
 const assets = {
   jsFiles,
   cssFiles,
@@ -64,15 +59,6 @@ const assets = {
   })),
 };
 
-const mergedBootData = {
-  ...bootdata,
-  assets,
-};
-
-const user = mergedBootData.user ?? {};
-const themeClass = user.lightTheme ? 'theme-light' : 'theme-dark';
-const lang = user.language || 'en';
-
 const cssLinks = cssFiles
   .map((a) => `    <link rel="stylesheet" href="/${a.filePath}" />`)
   .join('\n');
@@ -85,7 +71,7 @@ const jsScripts = jsFiles
 const safeJSON = (value) => JSON.stringify(value).replace(/<\/script/gi, '<\\/script');
 
 const html = `<!DOCTYPE html>
-<html lang="${lang}">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -101,7 +87,7 @@ const html = `<!DOCTYPE html>
     <link rel="mask-icon" href="/public/img/grafana_mask_icon.svg" color="#F05A28" />
 
 ${cssLinks}
-    <link rel="stylesheet" href="/${user.lightTheme ? assets.light : assets.dark}" />
+    <link rel="stylesheet" href="/${assets.dark}" />
 
     <script src="https://snippet.meticulous.ai/v1/meticulous.js" data-token="ceD9Uoa4XN0ST1SjIHfzgAgYrK0WrKQzJ4QTTsrZ"></script>
 
@@ -110,11 +96,23 @@ ${cssLinks}
     </script>
   </head>
 
-  <body class="${themeClass}">
+  <body class="theme-dark">
     <div id="reactRoot"></div>
 
     <script>
-      window.grafanaBootData = ${safeJSON(mergedBootData)};
+      // Bootdata is recorded on live Grafana via recordCustomData (see
+      // public/views/index.html) and restored here. Fresh assets are merged
+      // in from the build manifest, since recorded hashes are stale.
+      var assets = ${safeJSON(assets)};
+      var recorded = window.Meticulous && window.Meticulous.replay
+        ? window.Meticulous.replay.retrieveCustomData('grafanaBootData')
+        : null;
+      if (!recorded) {
+        throw new Error('Meticulous replay did not provide grafanaBootData custom value');
+      }
+      var bootData = JSON.parse(recorded);
+      bootData.assets = assets;
+      window.grafanaBootData = bootData;
       // Monolith index.html contract: public/app/index.ts awaits this promise.
       window.__grafana_boot_data_promise = Promise.resolve();
       window.__grafana_app_bundle_loaded = false;
@@ -132,6 +130,4 @@ ${jsScripts}
 const outPath = resolve(outPathArg);
 mkdirSync(dirname(outPath), { recursive: true });
 writeFileSync(outPath, html);
-console.log(
-  `Wrote ${outPath} (${jsFiles.length} js, ${cssFiles.length} css, bootdata fields: ${Object.keys(mergedBootData).join(', ')})`
-);
+console.log(`Wrote ${outPath} (${jsFiles.length} js, ${cssFiles.length} css)`);
