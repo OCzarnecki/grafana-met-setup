@@ -1067,7 +1067,7 @@
     "angularDetected": false
   },
   {
-    "name": "Jaeger",
+    "name": "Jäger",
     "type": "datasource",
     "id": "jaeger",
     "enabled": true,
