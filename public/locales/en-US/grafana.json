@@ -11184,7 +11184,7 @@
       "title": "Login failed",
       "unknown": "Unknown error occurred"
     },
-    "forgot-password": "Struggling to recall?",
+    "forgot-password": "Hast thou forgotten thy passwort?",
     "form": {
       "password-label": "Password",
       "password-placeholder": "password",
