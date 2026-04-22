@@ -30,7 +30,7 @@ export function getNavTitle(navId: string | undefined) {
     case 'starred':
       return t('nav.starred.title', 'Starred');
     case 'starred-empty':
-      return t('nav.starred-empty.title', 'Your starred dashboards will appear here');
+      return t('nav.starred-empty.title', 'Your starred dashboards shall appear here');
     case 'dashboards':
       return t('nav.dashboards.title', 'Dashboards');
     case 'dashboards/browse':

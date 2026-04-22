@@ -11184,7 +11184,7 @@
       "title": "Login failed",
       "unknown": "Unknown error occurred"
     },
-    "forgot-password": "Hast thou forgotten thy passwort?",
+    "forgot-password": "Forgot your password?",
     "form": {
       "password-label": "Password",
       "password-placeholder": "password",
@@ -12210,7 +12210,7 @@
       "title": "Starred"
     },
     "starred-empty": {
-      "title": "Your starred dashboards will appear here"
+      "title": "Your starred dashboards shall appear here"
     },
     "statistics-and-licensing": {
       "title": "Statistics and licensing"
