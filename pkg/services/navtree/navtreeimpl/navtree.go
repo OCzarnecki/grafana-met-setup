@@ -623,7 +623,7 @@ func (s *ServiceImpl) buildDataConnectionsNavLink(c *contextmodel.ReqContext) *n
 		// Add new connection — requires create/write permissions
 		children = append(children, &navtree.NavLink{
 			Id:       "connections-add-new-connection",
-			Text:     "Add new connection",
+			Text:     "Add new connexion",
 			SubTitle: "Browse and create new connections",
 			Url:      baseUrl + "/add-new-connection",
 			Children: []*navtree.NavLink{},

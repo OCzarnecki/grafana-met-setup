@@ -1,22 +1,6 @@
 name: Policybot
-on:
-  push:
-    paths:
-      - .policy.yml
-      - .policy.yml.tmpl
-      - justfile
-      - .github/workflows/*
-    branches:
-      - main
-  pull_request:
-    paths:
-      - .policy.yml
-      - .policy.yml.tmpl
-      - justfile
-      - .github/workflows/*
-    branches:
-      - main
-
+'on':
+  workflow_dispatch: {}
 permissions: {}
 
 concurrency:

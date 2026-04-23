@@ -1,10 +1,7 @@
 name: "Endpoint Migration Feature Toggle Check"
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-    branches: [main]
-
+'on':
+  workflow_dispatch: {}
 permissions:
   contents: read
 

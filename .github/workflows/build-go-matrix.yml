@@ -2,13 +2,8 @@
 # incoming pull requests are able to be compiled for all supported architectures and operating systems.
 name: Build Go (matrix)
 
-on:
-  pull_request:
-  push:
-    branches:
-      - main
-      - release-*.*.*
-
+'on':
+  workflow_dispatch: {}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}

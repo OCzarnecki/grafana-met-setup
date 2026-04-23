@@ -2,14 +2,8 @@
 # Intended to be dropped into the base repo, Ex: grafana/grafana
 name: Dispatch sync to mirror
 run-name: dispatch-sync-to-mirror-${{ github.ref_name }}
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - "main"
-      - "v*.*.*"
-      - "release-*"
-
+'on':
+  workflow_dispatch: {}
 permissions: {}
 
 # This is run after the pull request has been merged, so we'll run against the target branch

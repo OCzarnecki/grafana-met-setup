@@ -1,11 +1,6 @@
 name: Lint Frontend
-on:
-  pull_request:
-  push:
-    branches:
-      - main
-      - release-*.*.*
-
+'on':
+  workflow_dispatch: {}
 permissions: {}
 
 jobs:

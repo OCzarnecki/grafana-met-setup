@@ -1,8 +1,6 @@
 name: PR Checks
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-
+'on':
+  workflow_dispatch: {}
 concurrency:
   group: pr-checks-${{ github.event.number }}-new
   cancel-in-progress: true

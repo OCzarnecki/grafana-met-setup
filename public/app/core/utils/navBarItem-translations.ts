@@ -30,7 +30,7 @@ export function getNavTitle(navId: string | undefined) {
     case 'starred':
       return t('nav.starred.title', 'Starred');
     case 'starred-empty':
-      return t('nav.starred-empty.title', 'Your starred dashboards will appear here');
+      return t('nav.starred-empty.title', 'Your starred dashboards shall appear here');
     case 'dashboards':
       return t('nav.dashboards.title', 'Dashboards');
     case 'dashboards/browse':
@@ -58,7 +58,7 @@ export function getNavTitle(navId: string | undefined) {
     case 'explore':
       return t('nav.explore.title', 'Explore');
     case 'drilldown':
-      return t('nav.drilldown.title', 'Drilldown');
+      return t('nav.drilldown.title', 'Drill-all-the-way-down');
     case 'alerting':
       return t('nav.alerting.title', 'Alerting');
     case 'plugin-page-grafana-oncall-app':
